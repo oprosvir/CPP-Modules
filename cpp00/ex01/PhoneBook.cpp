@@ -6,7 +6,93 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:17:24 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/06 13:17:25 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/07 00:29:40 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "PhoneBook.hpp"
+
+// constructor with initialization list
+PhoneBook::PhoneBook() : _index(0), _count(0) {}
+
+static std::string truncate(std::string str) {
+    if (str.length() > 10)
+        return str.substr(0, 9) + ".";
+    return str;
+}
+
+void PhoneBook::addContact() {
+    Contact newContact;
+    std::string input;
+
+    std::cout << "Enter first name: ";
+    std::getline(std::cin, input);
+    if (input.empty()) return;
+    newContact.setFirstName(input);
+    
+    std::cout << "Enter last name: ";
+    std::getline(std::cin, input);
+    if (input.empty()) return;
+    newContact.setLastName(input);
+    
+    std::cout << "Enter nickname: ";
+    std::getline(std::cin, input);
+    if (input.empty()) return;
+    newContact.setNickname(input);
+    
+    std::cout << "Enter phone number: ";
+    std::getline(std::cin, input);
+    if (input.empty()) return;
+    newContact.setPhoneNumber(input);
+    
+    std::cout << "Enter darkest secret: ";
+    std::getline(std::cin, input);
+    if (input.empty()) return;
+    newContact.setDarkestSecret(input);
+
+    _contacts[_index] = newContact;
+    _index = (_index + 1) % 8;
+    if (_count < 8) _count++;
+    
+    std::cout << "Contact added successfully!" << std::endl;
+}
+
+void PhoneBook::searchContact() const {
+    if (_count == 0) {
+        std::cout << "PhoneBook is empty." << std::endl;
+        return;
+    }
+
+    std::cout << std::setw(10) << "Index" << "|"
+              << std::setw(10) << "First Name" << "|"
+              << std::setw(10) << "Last Name" << "|"
+              << std::setw(10) << "Nickname" << std::endl;
+
+    for (int i = 0; i < _count; ++i) {
+        std::cout << std::setw(10) << i << "|"
+                  << std::setw(10) << truncate(_contacts[i].getFirstName()) << "|"
+                  << std::setw(10) << truncate(_contacts[i].getLastName()) << "|"
+                  << std::setw(10) << truncate(_contacts[i].getNickname()) << std::endl;
+    }
+
+    std::cout << "Enter index to view full contact: ";
+    int index;
+    std::cin >> index;
+
+    if (std::cin.fail() || index < 0 || index >= _count) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid index!" << std::endl;
+        return;
+    }
+
+    const Contact& c = _contacts[index];
+    std::cout << "First name: "     << c.getFirstName()     << std::endl;
+    std::cout << "Last name: "      << c.getLastName()      << std::endl;
+    std::cout << "Nickname: "       << c.getNickname()      << std::endl;
+    std::cout << "Phone number: "   << c.getPhoneNumber()   << std::endl;
+    std::cout << "Darkest secret: " << c.getDarkestSecret() << std::endl;
+
+    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 
