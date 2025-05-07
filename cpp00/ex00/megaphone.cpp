@@ -6,14 +6,13 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 23:40:37 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/05 22:17:45 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/07 12:12:06 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-int	main(int argc, char *argv[])
-{
+int	main(int argc, char *argv[]) {
 	if (argc == 1)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
