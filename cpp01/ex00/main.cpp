@@ -6,17 +6,17 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 21:33:41 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/08 22:47:02 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/09 00:16:16 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int main(void)
-{
-    Zombie zombie("Igor");
-    zombie.announce();
-    
+int main(void) {
+    Zombie* zombie = newZombie("Igor");
+    delete zombie;
 
+    randomChump("Tralalero Tralala");
+    
     return 0;
 }
