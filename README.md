@@ -6,3 +6,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp00](./cpp00)  
   *Introduction to C++ syntax and structure: namespaces, classes, member functions, stdio streams, initialization lists, static, const, and other basic concepts.*
+
+- [cpp01](./cpp01)  
+  *Covers memory allocation, pointers to members, references, and switch statements.*
