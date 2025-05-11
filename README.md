@@ -9,3 +9,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp01](./cpp01)  
   *Covers memory allocation, pointers to members, references, and switch statements.*
+
+- [cpp02](./cpp02)  
+  *Exploring canonical class form, fixed-point numbers, and operator overloading in C++*
