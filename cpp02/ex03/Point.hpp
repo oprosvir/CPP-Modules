@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:39:15 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/16 19:06:41 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/18 23:31:05 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ class Point {
         Point& operator=(const Point& other);
         ~Point();
 
-        Fixed getX() const;
-        Fixed getY() const;
+        Fixed getX(void) const;
+        Fixed getY(void) const;
 };
 
 #endif

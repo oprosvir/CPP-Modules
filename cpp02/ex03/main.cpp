@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 18:52:23 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/16 19:47:10 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/19 00:36:28 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 int main(void) {
-    Point a(0.5945f, 0.0294f);
+    Point a(0, 0);
     Point b(10, 0);
     Point c(0, 10);
 
-    Point inside(0.3697, 3.8298);
-    Point outside(11, 5);
+    Point inside(2, 2);
+    Point outside(11, 5); // outside "false"
     Point edge(0, 5);   // on edge "false"
     Point vertex(0, 0); // vertex "false"
     
