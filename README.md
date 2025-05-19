@@ -12,3 +12,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp02](./cpp02)  
   *Focuses on Orthodox Canonical Form, fixed-point number implementation, ad-hoc polymorphism, and operator overloading.*
+
+- [cpp03](./cpp03)  
+  *Introduces class inheritance, including multiple inheritance and constructor chaining.*
