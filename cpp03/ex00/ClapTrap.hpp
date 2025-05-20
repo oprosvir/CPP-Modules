@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:22:47 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/20 15:31:47 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:08:54 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class ClapTrap {
         int _hitPoints;
         int _energyPoints;
         int _attackDamage;
+        int _maxHitPoints;
     public:
         ClapTrap();
         ClapTrap(const std::string& name);

@@ -6,25 +6,25 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:22:41 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/20 16:54:19 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/20 21:19:27 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
-    : _name("Dummy"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    : _name("Dummy"), _hitPoints(10), _energyPoints(10), _attackDamage(0), _maxHitPoints(10) {
     std::cout << "ClapTrap default constructor called for " << _name << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string& name)
-    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0), _maxHitPoints(10) {
     std::cout << "ClapTrap named constructor called for " << _name << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
-    : _name(other._name), _hitPoints(other._hitPoints),
-      _energyPoints(other._energyPoints), _attackDamage(other._attackDamage) {
+    : _name(other._name), _hitPoints(other._hitPoints), _energyPoints(other._energyPoints),
+    _attackDamage(other._attackDamage), _maxHitPoints(other._maxHitPoints) {
     std::cout << "ClapTrap copy constructor called for " << _name << std::endl;
 }
 
@@ -35,6 +35,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
         _hitPoints = other._hitPoints;
         _energyPoints = other._energyPoints;
         _attackDamage = other._attackDamage;
+        _maxHitPoints = other._maxHitPoints;
     }
     return *this;
 }
@@ -73,14 +74,14 @@ void ClapTrap::beRepaired(unsigned int amount) {
         std::cout << "ClapTrap " << _name << " can't repair. No HP or energy." << std::endl;
         return;
     }
-    if (_hitPoints == 10) {
+    if (_hitPoints == _maxHitPoints) {
         std::cout << "ClapTrap " << _name << " is already at full HP. Repair skipped." << std::endl;
         return;
     }
     _energyPoints--;
     _hitPoints += amount;
-    if (_hitPoints > 10)
-		_hitPoints = 10;
+    if (_hitPoints > _maxHitPoints)
+		_hitPoints = _maxHitPoints;
     std::cout << "ClapTrap " << _name << " repairs itself for "
               << amount << " hit points! Current HP: " << _hitPoints << std::endl;
 }

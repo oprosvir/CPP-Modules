@@ -6,14 +6,14 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 00:22:50 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/20 17:04:33 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:16:14 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
 int main(void) {
-    std::cout << "\033[1;32m=== Default Constructor Test ===\033[0m" << std::endl;
+    std::cout << "\n\033[1;32m=== Default Constructor Test ===\033[0m" << std::endl;
     ClapTrap bot1;
     std::cout << bot1 << std::endl;
 
