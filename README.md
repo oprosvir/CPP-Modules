@@ -15,3 +15,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp03](./cpp03)  
   *Introduces class inheritance, including multiple inheritance and constructor chaining.*
+
+- [cpp04](./cpp04)  
+  *Explores subtype polymorphism via virtual functions, abstract classes, deep copies, and interface-like design using pure virtual methods.*
