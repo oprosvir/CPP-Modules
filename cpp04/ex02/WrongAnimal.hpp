@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 01:01:51 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 19:42:40 by oprosvir         ###   ########.fr       */
+/*   Created: 2025/05/21 00:56:26 by oprosvir          #+#    #+#             */
+/*   Updated: 2025/05/22 18:36:10 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
 #include <string>
 #include <iostream>
 
-class Brain {
-private:
-    std::string _ideas[100];
+class WrongAnimal {
+protected:
+    std::string _type;
 public:
-    Brain();
-    Brain(const Brain& other);
-    Brain& operator=(const Brain& other);
-    ~Brain();
+    WrongAnimal();
+    WrongAnimal(const WrongAnimal& other);
+    WrongAnimal& operator=(const WrongAnimal& other);
+    virtual ~WrongAnimal();
 
-    void setIdea(int index, const std::string& idea);
-    std::string getIdea(int index) const;
+    void makeSound() const; // not virtual
+    std::string getType() const;
 };
 
 #endif

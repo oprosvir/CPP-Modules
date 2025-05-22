@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:55:17 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:06:13 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:32:09 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,18 @@
 
 class Cat : public Animal {
 private:
-    Brain* brain;
-
+    Brain* _brain;
 public:
     Cat();
     Cat(const Cat& other);
     Cat& operator=(const Cat& other);
-    ~Cat();
+    virtual ~Cat();
 
     void makeSound() const;
 
-    // Опционально — доступ к brain
+    // get access to Brain
     void setIdea(int index, const std::string& idea);
     std::string getIdea(int index) const;
 };
 
 #endif
-
