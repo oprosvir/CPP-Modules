@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:47:08 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 19:32:12 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 23:36:49 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ Animal::Animal(const Animal& other) : _type(other._type) {
 
 Animal& Animal::operator=(const Animal& other) {
     std::cout << "Animal assignment operator called" << std::endl;
-    if (this != &other)
-        _type = other._type;
+    (void)other;
     return *this;
 }
 
