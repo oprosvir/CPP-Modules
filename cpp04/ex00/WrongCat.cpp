@@ -6,15 +6,14 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:56:49 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 00:57:47 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:21:31 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
-#include <iostream>
 
 WrongCat::WrongCat() {
-    type = "WrongCat";
+    _type = "WrongCat";
     std::cout << "WrongCat constructor called" << std::endl;
 }
 
@@ -26,7 +25,7 @@ WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
 WrongCat& WrongCat::operator=(const WrongCat& other) {
     std::cout << "WrongCat assignment operator called" << std::endl;
     if (this != &other)
-        this->type = other.type;
+        _type = other._type;
     return *this;
 }
 
@@ -35,5 +34,5 @@ WrongCat::~WrongCat() {
 }
 
 void WrongCat::makeSound() const {
-    std::cout << "Meow? (but wrong) ❌" << std::endl;
+    std::cout << "Meow?" << std::endl;
 }

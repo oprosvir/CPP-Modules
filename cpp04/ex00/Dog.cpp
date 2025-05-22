@@ -6,27 +6,25 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:54:35 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 00:54:35 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:58:07 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
-#include <iostream>
 
 Dog::Dog() {
-    type = "Dog";
+    _type = "Dog";
     std::cout << "Dog constructor called" << std::endl;
 }
 
 Dog::Dog(const Dog& other) : Animal(other) {
     std::cout << "Dog copy constructor called" << std::endl;
-    *this = other;
 }
 
 Dog& Dog::operator=(const Dog& other) {
     std::cout << "Dog assignment operator called" << std::endl;
     if (this != &other)
-        this->type = other.type;
+        _type = other._type;
     return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:47:11 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 00:52:19 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:28:25 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #define ANIMAL_HPP
 
 #include <string>
+#include <iostream>
 
 class Animal {
 protected:
-    std::string type;
-
+    std::string _type;
 public:
     Animal();
     Animal(const Animal& other);

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:57:03 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 00:57:56 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:37:21 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ public:
     WrongCat& operator=(const WrongCat& other);
     ~WrongCat();
 
-    void makeSound() const; // ❌ Не virtual → полиморфизм не работает
+    void makeSound() const; // polymorphism won't work
 };
 
 #endif
