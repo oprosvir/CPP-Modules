@@ -6,14 +6,14 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:06:50 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 21:10:53 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:55:53 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int main() {
+int main(void) {
     std::cout << "\n\033[1;34m=== Creating Animals Array ===\033[0m" << std::endl;
     Animal* animals[10];
 

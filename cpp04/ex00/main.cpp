@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:46:42 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 20:56:05 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:56:14 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Cat.hpp"
 #include "WrongCat.hpp"
 
-int main() {
+int main(void) {
     std::cout << "\n\033[1;34m=== Correct polymorphism ===\033[0m" << std::endl;
 
     const Animal* meta = new Animal();
