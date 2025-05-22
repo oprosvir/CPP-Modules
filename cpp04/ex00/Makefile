@@ -3,6 +3,8 @@ NAME = polymorph
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
+OBJDIR = obj
+
 SRCS = main.cpp \
        Animal.cpp \
        Dog.cpp \
@@ -10,20 +12,23 @@ SRCS = main.cpp \
        WrongAnimal.cpp \
        WrongCat.cpp
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 
 HEADERS = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(NAME): $(OBJDIR) $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.cpp $(HEADERS)
+$(OBJDIR)/%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
