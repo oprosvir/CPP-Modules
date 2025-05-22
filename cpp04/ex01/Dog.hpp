@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:54:10 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 20:42:37 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:32:13 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ public:
     Dog();
     Dog(const Dog& other);
     Dog& operator=(const Dog& other);
-    ~Dog();
+    virtual ~Dog();
 
     void makeSound() const;
 

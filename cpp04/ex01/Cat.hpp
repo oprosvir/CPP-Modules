@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:55:17 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 20:42:44 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:32:09 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ public:
     Cat();
     Cat(const Cat& other);
     Cat& operator=(const Cat& other);
-    ~Cat();
+    virtual ~Cat();
 
     void makeSound() const;
 
