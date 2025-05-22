@@ -6,12 +6,11 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:22:12 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:22:18 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:35:11 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
-#include <iostream>
 
 Ice::Ice() : AMateria("ice") {
     std::cout << "Ice constructor called" << std::endl;
@@ -23,8 +22,7 @@ Ice::Ice(const Ice& other) : AMateria(other) {
 
 Ice& Ice::operator=(const Ice& other) {
     std::cout << "Ice assignment operator called" << std::endl;
-    if (this != &other)
-        AMateria::operator=(other);
+    (void)other;
     return *this;
 }
 
