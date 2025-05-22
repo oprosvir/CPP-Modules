@@ -3,6 +3,8 @@ NAME = materia
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
+OBJDIR = obj
+
 SRCS = main.cpp \
        AMateria.cpp \
        Ice.cpp \
@@ -10,7 +12,7 @@ SRCS = main.cpp \
        Character.cpp \
        MateriaSource.cpp
 
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 
 HEADERS = AMateria.hpp Ice.hpp Cure.hpp \
           ICharacter.hpp Character.hpp \
@@ -18,14 +20,17 @@ HEADERS = AMateria.hpp Ice.hpp Cure.hpp \
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+$(NAME): $(OBJDIR) $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.cpp $(HEADERS)
+$(OBJDIR)/%.o: %.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:20:26 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:20:54 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 00:40:55 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <string>
 
-class AMateria; // предварительное объявление
+class AMateria;
 
 class ICharacter {
 public:
