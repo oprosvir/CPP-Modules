@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:33 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:24:35 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 01:52:42 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 #include <iostream>
 
 MateriaSource::MateriaSource() {
-    std::cout << "MateriaSource constructor called" << std::endl;
     for (int i = 0; i < 4; ++i)
-        _storage[i] = NULL;
+        _templates[i] = NULL;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
-    for (int i = 0; i < 4; ++i)
-        _storage[i] = other._storage[i] ? other._storage[i]->clone() : NULL;
+    for (int i = 0; i < 4; ++i) {
+        if (other._templates[i])
+            _templates[i] = other._templates[i]->clone();
+        else
+            _templates[i] = NULL;
+    }
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
     if (this != &other) {
         for (int i = 0; i < 4; ++i) {
-            delete _storage[i];
-            _storage[i] = other._storage[i] ? other._storage[i]->clone() : NULL;
+            if (_templates[i])
+                delete _templates[i];
+            if (other._templates[i])
+                _templates[i] = other._templates[i]->clone();
+            else
+                _templates[i] = NULL;
         }
     }
     return *this;
@@ -36,15 +43,15 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
 
 MateriaSource::~MateriaSource() {
     for (int i = 0; i < 4; ++i)
-        delete _storage[i];
+        delete _templates[i];
 }
 
 void MateriaSource::learnMateria(AMateria* m) {
     if (!m)
         return;
     for (int i = 0; i < 4; ++i) {
-        if (!_storage[i]) {
-            _storage[i] = m;
+        if (!_templates[i]) {
+            _templates[i] = m;
             return;
         }
     }
@@ -52,8 +59,8 @@ void MateriaSource::learnMateria(AMateria* m) {
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
     for (int i = 0; i < 4; ++i) {
-        if (_storage[i] && _storage[i]->getType() == type)
-            return _storage[i]->clone();
+        if (_templates[i] && _templates[i]->getType() == type)
+            return _templates[i]->clone();
     }
     return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:19 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:24:23 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 01:47:09 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 class MateriaSource : public IMateriaSource {
 private:
-    AMateria* _storage[4];
-
+    AMateria* _templates[4];
 public:
     MateriaSource();
     MateriaSource(const MateriaSource& other);
