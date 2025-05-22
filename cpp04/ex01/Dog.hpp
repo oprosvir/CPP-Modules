@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:54:10 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 01:04:58 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:42:37 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 
 class Dog : public Animal {
 private:
-    Brain* brain;
-
+    Brain* _brain;
 public:
     Dog();
     Dog(const Dog& other);
@@ -28,7 +27,6 @@ public:
 
     void makeSound() const;
 
-    // Опционально: доступ к brain
     void setIdea(int index, const std::string& idea);
     std::string getIdea(int index) const;
 };

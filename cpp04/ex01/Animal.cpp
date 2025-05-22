@@ -6,26 +6,24 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:47:08 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/21 00:53:13 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:32:02 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
-#include <iostream>
 
-
-Animal::Animal() : type("Animal") {
+Animal::Animal() : _type("Animal") {
     std::cout << "Animal constructor called" << std::endl;
 }
 
-Animal::Animal(const Animal& other) : type(other.type) {
+Animal::Animal(const Animal& other) : _type(other._type) {
     std::cout << "Animal copy constructor called" << std::endl;
 }
 
 Animal& Animal::operator=(const Animal& other) {
     std::cout << "Animal assignment operator called" << std::endl;
     if (this != &other)
-        type = other.type;
+        _type = other._type;
     return *this;
 }
 
@@ -38,5 +36,5 @@ void Animal::makeSound() const {
 }
 
 std::string Animal::getType() const {
-    return type;
+    return _type;
 }

@@ -6,12 +6,11 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:47:08 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 13:54:44 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:32:12 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
-#include <iostream>
 
 Animal::Animal() : _type("Animal") {
     std::cout << "Animal constructor called" << std::endl;

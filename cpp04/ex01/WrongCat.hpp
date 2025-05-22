@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 01:01:51 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 19:42:40 by oprosvir         ###   ########.fr       */
+/*   Created: 2025/05/21 00:57:03 by oprosvir          #+#    #+#             */
+/*   Updated: 2025/05/22 14:37:21 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef WRONGCAT_HPP
+#define WRONGCAT_HPP
 
-#include <string>
-#include <iostream>
+#include "WrongAnimal.hpp"
 
-class Brain {
-private:
-    std::string _ideas[100];
+class WrongCat : public WrongAnimal {
 public:
-    Brain();
-    Brain(const Brain& other);
-    Brain& operator=(const Brain& other);
-    ~Brain();
+    WrongCat();
+    WrongCat(const WrongCat& other);
+    WrongCat& operator=(const WrongCat& other);
+    ~WrongCat();
 
-    void setIdea(int index, const std::string& idea);
-    std::string getIdea(int index) const;
+    void makeSound() const; // polymorphism won't work
 };
 
 #endif

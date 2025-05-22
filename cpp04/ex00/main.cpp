@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 00:46:42 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/22 18:38:10 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:56:05 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "WrongCat.hpp"
 
 int main() {
-    std::cout << "\n=== Correct polymorphism ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Correct polymorphism ===\033[0m" << std::endl;
 
     const Animal* meta = new Animal();
     const Animal* dog = new Dog();
@@ -31,14 +31,14 @@ int main() {
     delete dog;
     delete cat;
 
-    std::cout << "\n=== Wrong polymorphism (no virtual) ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Wrong polymorphism (no virtual) ===\033[0m" << std::endl;
 
     const WrongAnimal* wrongCat = new WrongCat();
     wrongCat->makeSound(); // WrongAnimal::makeSound()
     
     delete wrongCat;
 
-    std::cout << "\n=== Copy constructor test ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Copy constructor test ===\033[0m" << std::endl;
     
     Dog originalDog;
     Dog copyDog(originalDog);
@@ -46,7 +46,7 @@ int main() {
     Cat originalCat;
     Cat copyCat(originalCat);
 
-    std::cout << "\n=== Assignment operator test ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Assignment operator test ===\033[0m" << std::endl;
     
     Dog dog1;
     Dog dog2;
@@ -56,7 +56,7 @@ int main() {
     Cat cat2;
     cat2 = cat1;
 
-    std::cout << "\n=== Assignment via pointers ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Assignment via pointers ===\033[0m" << std::endl;
 
     Cat* catt = new Cat();
     Cat* cattt = new Cat();
@@ -68,14 +68,14 @@ int main() {
     delete cattt;
     delete dogg;
 
-    std::cout << "\n=== Assign sibling classes ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Assign sibling classes ===\033[0m" << std::endl;
     
     Dog dog3;
     Cat cat3;
     // cat1 = dog1; // compile error: Dog can't be assigned to Cat
     cat3.makeSound();
 
-    std::cout << "\n=== Destructors ===" << std::endl;
+    std::cout << "\n\033[1;34m=== Destructors ===\033[0m" << std::endl;
     
     return 0;
 }
