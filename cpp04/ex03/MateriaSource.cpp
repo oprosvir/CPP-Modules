@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:33 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/23 02:23:26 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:56:43 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void MateriaSource::learnMateria(AMateria* m) {
         return;
     for (int i = 0; i < 4; ++i) {
         if (!_templates[i]) {
-            _templates[i] = m->clone();
+            _templates[i] = m;
             std::cout << "Learned materia of type: " << m->getType() << std::endl;
             return;
         }

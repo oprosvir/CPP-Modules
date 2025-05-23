@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:59 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/23 02:32:45 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:14:40 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void my_test() {
     std::cout << "\n\033[1;36m--- Cleanup ---\033[0m" << std::endl;
     delete ice;
     delete cure;
-    delete clone;
     delete luna;
     delete noctis;
     delete lunaCopy;
