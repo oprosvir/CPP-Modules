@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:33 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/23 01:57:51 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 02:23:26 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,20 @@ void MateriaSource::learnMateria(AMateria* m) {
     for (int i = 0; i < 4; ++i) {
         if (!_templates[i]) {
             _templates[i] = m->clone();
+            std::cout << "Learned materia of type: " << m->getType() << std::endl;
             return;
         }
     }
+    std::cout << "MateriaSource full, cannot learn more." << std::endl;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
     for (int i = 0; i < 4; ++i) {
-        if (_templates[i] && _templates[i]->getType() == type)
+        if (_templates[i] && _templates[i]->getType() == type) {
+            std::cout << "Creating materia of type: " << type << std::endl;
             return _templates[i]->clone();
+        }
     }
+    std::cout << "Materia type '" << type << "' not found" << std::endl;
     return NULL;
 }

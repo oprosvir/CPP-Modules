@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:59 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/23 02:12:05 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 02:32:45 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,52 @@ void my_test() {
     std::cout << "\n\033[1;36m--- Cleanup ---\033[0m" << std::endl;
     delete ice;
     delete cure;
+    delete clone;
     delete luna;
     delete noctis;
     delete lunaCopy;
 }
 
+void extended_test() {
+    std::cout << "\n\033[1;35m--- Extended Logic Test ---\033[0m" << std::endl;
+
+    IMateriaSource* book = new MateriaSource();
+    book->learnMateria(new Ice());
+    book->learnMateria(new Cure());
+
+    std::cout << "\n[Test createMateria() with unknown type]" << std::endl;
+    AMateria* unknown = book->createMateria("fire");
+    if (!unknown)
+        std::cout << "Correctly returned NULL for unknown materia" << std::endl;
+
+    Character* prompto = new Character("Prompto");
+
+    std::cout << "\n[Test overfilling inventory (more than 4)]" << std::endl;
+    prompto->equip(book->createMateria("ice"));
+    prompto->equip(book->createMateria("ice"));
+    prompto->equip(book->createMateria("cure"));
+    prompto->equip(book->createMateria("cure"));
+    prompto->equip(book->createMateria("ice")); // должна быть проигнорирована
+
+    std::cout << "\n[Test using empty slot]" << std::endl;
+    prompto->use(3, *prompto); // есть
+    prompto->use(4, *prompto); // ❌ за пределами
+    prompto->use(-1, *prompto); // ❌ отрицательный индекс
+
+    std::cout << "\n[Test unequip and re-equip]" << std::endl;
+    prompto->unequip(2); // cure из слота 2
+    prompto->use(2, *prompto); // ❌ ничего
+    prompto->equip(book->createMateria("cure")); // снова cure в слот 2
+    prompto->use(2, *prompto); // ✅ теперь работает
+
+    std::cout << "\n[Cleanup]" << std::endl;
+    delete prompto;
+    delete book;
+}
+
 int main() {
     subject_test();
     my_test();
+    extended_test();
     return 0;
 }
