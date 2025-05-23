@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 01:24:59 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/23 10:14:40 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:39:11 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void my_test() {
     std::cout << "ice->getType(): " << ice->getType() << std::endl;
     std::cout << "cure->getType(): " << cure->getType() << std::endl;
 
-    *cure = *ice; // AMateria::operator=
+    *cure = *ice;
 
     std::cout << "After assignment:" << std::endl;
     std::cout << "ice->getType(): " << ice->getType() << std::endl;
@@ -72,15 +72,14 @@ void my_test() {
     luna->use(0, *noctis); // again nothing
 
     std::cout << "\n\033[1;36m--- Deep Copy test ---\033[0m" << std::endl;
-    Character* lunaCopy = new Character(*luna);
-    lunaCopy->use(1, *noctis); // cure again
+    Character lunaCopy(*luna);   // on the stack
+    lunaCopy.use(1, *noctis); // cure again
 
     std::cout << "\n\033[1;36m--- Cleanup ---\033[0m" << std::endl;
     delete ice;
     delete cure;
     delete luna;
     delete noctis;
-    delete lunaCopy;
 }
 
 void extended_test() {
@@ -89,6 +88,7 @@ void extended_test() {
     IMateriaSource* book = new MateriaSource();
     book->learnMateria(new Ice());
     book->learnMateria(new Cure());
+    // book->learnMateria(new Fire());
 
     std::cout << "\n[Test createMateria() with unknown type]" << std::endl;
     AMateria* unknown = book->createMateria("fire");
@@ -102,18 +102,18 @@ void extended_test() {
     prompto->equip(book->createMateria("ice"));
     prompto->equip(book->createMateria("cure"));
     prompto->equip(book->createMateria("cure"));
-    prompto->equip(book->createMateria("ice")); // должна быть проигнорирована
+    prompto->equip(book->createMateria("ice")); // ignore
 
     std::cout << "\n[Test using empty slot]" << std::endl;
-    prompto->use(3, *prompto); // есть
-    prompto->use(4, *prompto); // ❌ за пределами
-    prompto->use(-1, *prompto); // ❌ отрицательный индекс
+    prompto->use(3, *prompto); // ok
+    prompto->use(4, *prompto); // out 
+    prompto->use(-1, *prompto); // neg
 
     std::cout << "\n[Test unequip and re-equip]" << std::endl;
-    prompto->unequip(2); // cure из слота 2
-    prompto->use(2, *prompto); // ❌ ничего
-    prompto->equip(book->createMateria("cure")); // снова cure в слот 2
-    prompto->use(2, *prompto); // ✅ теперь работает
+    prompto->unequip(2);
+    prompto->use(2, *prompto);
+    prompto->equip(book->createMateria("cure"));
+    prompto->use(2, *prompto);
 
     std::cout << "\n[Cleanup]" << std::endl;
     delete prompto;
