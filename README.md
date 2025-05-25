@@ -18,3 +18,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp04](./cpp04)  
   *Explores subtype polymorphism via virtual functions, abstract classes, deep copies, and interface-like design using pure virtual methods.*
+
+- [cpp05](./cpp05)  
+  *The purpose of this module is to introduce us to repetition and exceptions.*
