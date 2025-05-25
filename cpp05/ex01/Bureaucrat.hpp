@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:37:41 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/25 16:24:04 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/25 23:15:15 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class Bureaucrat {
 
         void incrementGrade();
         void decrementGrade();
+        void signForm(Form& form);
         
         class GradeTooHighException : public std::exception {
             public:
