@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:15:57 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/26 19:05:49 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:39:51 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void AForm::beSigned(const Bureaucrat& b) {
     _isSigned = true;
 }
 
-void AForm::checkExecutability(const Bureaucrat& executor) const {
+void AForm::checkExecutability(Bureaucrat const& executor) const {
     if (!this->isSigned())
         throw FormNotSignedException();
     if (executor.getGrade() > this->getGradeToExecute())

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:19:26 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/26 18:55:09 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/26 21:39:32 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ public:
     const std::string& getTarget() const;
 
     void beSigned(const Bureaucrat& b);
-    void checkExecutability(const Bureaucrat& executor) const;
+    void checkExecutability(Bureaucrat const& executor) const;
 
     // must be overridden
     virtual void execute(Bureaucrat const& executor) const = 0;
