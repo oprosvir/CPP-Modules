@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 12:37:38 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/26 17:28:26 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/26 19:18:22 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ void Bureaucrat::signForm(AForm& form) {
     }
     catch (std::exception& e) {
         std::cout << _name << " couldn't sign " << form.getName()
+                  << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(const AForm& form) const {
+    try {
+        form.execute(*this);
+        std::cout << _name << " executed " << form.getName() << std::endl;
+    }
+    catch (std::exception& e) {
+        std::cout << _name << " couldn't execute " << form.getName()
                   << " because " << e.what() << std::endl;
     }
 }
