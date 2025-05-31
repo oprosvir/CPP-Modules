@@ -6,14 +6,11 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:22:55 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/31 16:49:15 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/31 20:53:00 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <iomanip>
-#include <cstdlib>
-#include <limits>
 
 ScalarConverter::ScalarConverter() {}
 ScalarConverter::~ScalarConverter() {}
@@ -37,8 +34,10 @@ static void printFromChar(char c) {
 
 static bool isIntLiteral(const std::string& str) {
     char* end;
-    std::strtol(str.c_str(), &end, 10);
-    return *end == '\0';
+    errno = 0;
+    long val = std::strtol(str.c_str(), &end, 10);
+    return *end == '\0' && errno != ERANGE &&
+           val >= INT_MIN && val <= INT_MAX;
 }
 
 static void printFromInt(int i) {
@@ -54,19 +53,41 @@ static void printFromInt(int i) {
     std::cout << "double: " << static_cast<double>(i) << std::endl;
 }
 
-void ScalarConverter::convert(const std::string& literal) {
-    const int minInt = std::numeric_limits<int>::min();
-    const int maxInt = std::numeric_limits<int>::max();
+static bool isFloatLiteral(const std::string& str) {
+    char* end;
+    std::strtof(str.c_str(), &end);
+    return *end == 'f' && *(end + 1) == '\0';
+}
 
+static void printFromFloat(float f) {
+    std::cout << "char: ";
+    if (std::isnan(f) || f < 0 || f > 127)
+        std::cout << "impossible\n";
+    else if (!std::isprint(static_cast<char>(f)))
+        std::cout << "Non displayable\n";
+    else
+        std::cout << "'" << static_cast<char>(f) << "'\n";
+
+    std::cout << "int: ";
+    if (f < static_cast<float>(INT_MIN) ||
+        f > static_cast<float>(INT_MAX) || std::isnan(f))
+        std::cout << "impossible\n";
+    else
+        std::cout << static_cast<int>(f) << "\n";
+
+    std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f\n";
+    std::cout << "double: " << static_cast<double>(f) << "\n";
+}
+
+void ScalarConverter::convert(const std::string& literal) {
     if (isCharLiteral(literal))
         return printFromChar(literal[0]);
     else if (isIntLiteral(literal)) {
-        long val = std::strtol(literal.c_str(), NULL, 10);
-        if (val < minInt || val > maxInt) {
-            std::cerr << "Error: int overflow" << std::endl;
-            return ;
-        }
-        return printFromInt(static_cast<int>(val));
+        int i = std::strtol(literal.c_str(), NULL, 10);
+        return printFromInt(i);
+    } else if (isFloatLiteral(literal)) {
+        float f = std::strtof(literal.c_str(), NULL);
+        return printFromFloat(f);
     } else
         std::cerr << "Error: invalid literal format" << std::endl;
 }
