@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:22:31 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/31 20:53:04 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/31 21:39:02 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <limits>
 #include <limits.h>
 #include <cmath>
 #include <cerrno>

@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 11:22:55 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/31 20:53:00 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/05/31 22:07:28 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void printFromChar(char c) {
         std::cout << "'" << c << "'" << std::endl;
     std::cout << "int: " << static_cast<int>(c) << std::endl;
     std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(c) << "f\n";
-    std::cout << "double: " << static_cast<double>(c) << "\n";
+    std::cout << "double: " << static_cast<double>(c) << std::endl;
 }
 
 static bool isIntLiteral(const std::string& str) {
@@ -73,10 +73,37 @@ static void printFromFloat(float f) {
         f > static_cast<float>(INT_MAX) || std::isnan(f))
         std::cout << "impossible\n";
     else
-        std::cout << static_cast<int>(f) << "\n";
+        std::cout << static_cast<int>(f) << std::endl;
 
     std::cout << "float: " << std::fixed << std::setprecision(1) << f << "f\n";
-    std::cout << "double: " << static_cast<double>(f) << "\n";
+    std::cout << "double: " << static_cast<double>(f) << std::endl;
+}
+
+static bool isDoubleLiteral(const std::string& str) {
+    char* end;
+    std::strtod(str.c_str(), &end);
+    return *end == '\0';
+}
+
+static void printFromDouble(double d) {
+    std::cout << "char: ";
+    if (std::isnan(d) || d < 0 || d > 127)
+        std::cout << "impossible\n";
+    else if (!std::isprint(static_cast<char>(d)))
+        std::cout << "Non displayable\n";
+    else
+        std::cout << "'" << static_cast<char>(d) << "'\n";
+
+    std::cout << "int: ";
+    if (d < static_cast<double>(INT_MIN) ||
+        d > static_cast<double>(INT_MAX) || std::isnan(d))
+        std::cout << "impossible\n";
+    else
+        std::cout << static_cast<int>(d) << std::endl;
+    
+    std::cout << "float: ";
+    std::cout << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f\n";
+    std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
 }
 
 void ScalarConverter::convert(const std::string& literal) {
@@ -88,6 +115,9 @@ void ScalarConverter::convert(const std::string& literal) {
     } else if (isFloatLiteral(literal)) {
         float f = std::strtof(literal.c_str(), NULL);
         return printFromFloat(f);
+    } else if (isDoubleLiteral(literal)) {
+        double d = std::strtod(literal.c_str(), NULL);
+        return printFromDouble(d);
     } else
         std::cerr << "Error: invalid literal format" << std::endl;
 }
