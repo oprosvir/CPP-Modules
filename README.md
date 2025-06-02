@@ -22,5 +22,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
 - [cpp05](./cpp05)  
   *The purpose of this module is to introduce us to repetition and exceptions.*
 
-- [cpp06](./cpp06)
+- [cpp06](./cpp06)  
   *Covers explicit type conversions using static_cast, reinterpret_cast, and dynamic_cast.*
+  
