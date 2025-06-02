@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 22:35:04 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/05/31 22:42:53 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/02 22:42:48 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define SERIALIZER_HPP
 
 #include "Data.hpp"
-#include <cstdint>
+#include <stdint.h>
 
 class Serializer {
 private:
