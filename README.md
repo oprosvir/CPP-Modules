@@ -24,4 +24,7 @@ This repository contains a collection of C++ exercises, organized into modules. 
 
 - [cpp06](./cpp06)  
   *Casts in C++: static_cast, reinterpret_cast, dynamic_cast.*
+
+- [cpp07](./cpp07)  
+  *Introduces function and class templates: generic programming with `template<typename T>`, template instantiation, and basic exception safety in templates.*
   
