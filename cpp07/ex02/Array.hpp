@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 09:54:27 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/05 10:55:52 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/05 21:21:45 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ private:
 	T* _data;
 	unsigned int _size;
 };
+
+template<typename T>
+std::ostream& operator<<(std::ostream& o, const Array<T>& arr);
 
 #include "Array.tpp"  // template implementation
 
