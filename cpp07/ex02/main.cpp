@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 09:54:07 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/05 21:25:55 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:30:28 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,26 @@ int main(void) {
 
     std::cout << "\n--- Int array test ---" << std::endl;
 	Array<int> numbers(5);
+	std::cout << "Before initialization:\n";
+	std::cout << numbers;
 	for (unsigned int i = 0; i < numbers.size(); ++i)
 		numbers[i] = i * 10;
+	std::cout << "After initialization:\n";
 	std::cout << numbers;
+
+	std::cout << "\n--- Float array test ---" << std::endl;
+	Array<float> floats(4);
+	std::cout << "Before initialization:\n";
+	std::cout << floats;
+	for (unsigned int i = 0; i < floats.size(); ++i)
+		floats[i] = i + 0.5f;
+	std::cout << "After initialization:\n";
+	std::cout << floats;
+
+	std::cout << "\n--- Bool array test ---" << std::endl;
+	Array<bool> flags(2);
+	std::cout << "Before initialization:\n";
+	std::cout << flags;
         
     std::cout << "\n--- String array test ---" << std::endl;
 	Array<std::string> strings(3);

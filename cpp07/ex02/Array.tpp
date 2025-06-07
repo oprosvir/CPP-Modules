@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 10:40:11 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/05 21:21:59 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/07 11:30:46 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ARRAY_TPP
 
 #include "Array.hpp"
+#include <iomanip>
 
 // Default constructor: empty array
 template<typename T>
@@ -23,7 +24,7 @@ Array<T>::Array() : _data(NULL), _size(0) {
 
 // Constructor with size
 template<typename T>
-Array<T>::Array(unsigned int n) : _data(new T[n]), _size(n) {
+Array<T>::Array(unsigned int n) : _data(new T[n]()), _size(n) {
 	std::cout << "size constructor with n = " << n << "\n";
 }
 
@@ -80,8 +81,16 @@ const T& Array<T>::operator[](unsigned int index) const {
 
 template<typename T>
 std::ostream& operator<<(std::ostream& o, const Array<T>& arr) {
+	o << std::fixed << std::setprecision(1); // float
+	o << std::boolalpha;  // bool
+
 	for (unsigned int i = 0; i < arr.size(); ++i)
 		o << "[" << i << "] = " << arr[i] << std::endl;
+
+	o << std::noboolalpha;
+	o.unsetf(std::ios::fixed);
+	o.precision(6);
+	
 	return o;
 }
 
