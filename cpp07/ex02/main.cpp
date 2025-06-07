@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 09:54:07 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/07 11:30:28 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:04:54 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(void) {
 	std::cout << floats;
 
 	std::cout << "\n--- Bool array test ---" << std::endl;
-	Array<bool> flags(2);
+	const Array<bool> flags(2);
 	std::cout << "Before initialization:\n";
 	std::cout << flags;
         
