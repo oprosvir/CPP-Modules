@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 21:53:15 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/07 22:47:04 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:36:54 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,15 @@
 #define EASYFIND_HPP
 
 #include <algorithm> // std::find
-#include <exception>
+#include <stdexcept>
 #include <iostream>
-
-class ValueNotFoundException : public std::exception {
-public:
-	const char* what() const throw() {
-		return "Value not found in container";
-	}
-};
 
 // Non-const version
 template <typename T>
 typename T::iterator easyfind(T& container, int value) {
 	typename T::iterator it = std::find(container.begin(), container.end(), value);
 	if (it == container.end())
-		throw ValueNotFoundException();
+		throw std::runtime_error("Value not found in container");
 	return it;
 }
 
@@ -38,7 +31,7 @@ template <typename T>
 typename T::const_iterator easyfind(const T& container, int value) {
 	typename T::const_iterator it = std::find(container.begin(), container.end(), value);
 	if (it == container.end())
-		throw ValueNotFoundException();
+		throw std::runtime_error("Value not found in container");
 	return it;
 }
 
