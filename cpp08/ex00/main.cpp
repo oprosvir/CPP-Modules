@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 21:52:48 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/08 12:05:23 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:22:57 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ int main(void) {
         std::cout << "Modified to: " << *it << std::endl;
         std::cout << "Vector after modification: ";
         printContainer(v);
+        std::cout << "Inserting before modified element ..." << std::endl;
+        v.insert(easyfind(v, 42), 99);
+        std::cout << "Vector after insert: ";
+        printContainer(v);
         std::cout << "Erasing modified element ..." << std::endl;
-        v.erase(it);
+        v.erase(easyfind(v, 42));
         std::cout << "Vector after erase: ";
         printContainer(v);
     } catch (const std::exception& e) {
