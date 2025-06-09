@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 21:51:20 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/08 23:16:39 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/09 22:50:26 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,14 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& o, const Span& span);
+
+template <typename Iterator>
+void Span::addRange(Iterator begin, Iterator end) {
+	size_t count = std::distance(begin, end);
+	if (_data.size() + count > _maxSize)
+		throw std::runtime_error("Range exceeds span capacity");
+
+	_data.insert(_data.end(), begin, end);
+}
 
 #endif
