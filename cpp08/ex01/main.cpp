@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 21:50:59 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/09 00:03:51 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/09 21:29:15 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void) {
     sp.addNumber(11);
 
     std::cout << "Span: " << sp << std::endl;
-    //std::cout << "Shortest span: " << sp.shortestSpan() << std::endl; // -> 2
+    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl; // -> 2
     std::cout << "Longest span: " << sp.longestSpan() << std::endl;   // -> 14
 
     std::cout << "\n--- Exception on overflow ---" << std::endl;
@@ -62,9 +62,36 @@ int main(void) {
     for (int i = 0; i < 10000; ++i)
         big.addNumber(i * 3);
     
-    //std::cout << "Shortest span: " << big.shortestSpan() << std::endl;
+    std::cout << "Shortest span: " << big.shortestSpan() << std::endl;
     std::cout << "Longest span: " << big.longestSpan() << std::endl;
     //std::cout << big << std::endl;
+
+    std::cout << "\n--- Equal elements test ---" << std::endl;
+
+    Span fet(2);
+    fet.addNumber(2);
+    fet.addNumber(2);
+    std::cout << "Span: " << fet << std::endl;
+    std::cout << "Shortest span: " << fet.shortestSpan() << std::endl;
+    std::cout << "Longest span:  " << fet.longestSpan() << std::endl;
+
+    std::cout << "\n--- Exception with too few elements ---" << std::endl;
+
+    Span tiny(1);
+    tiny.addNumber(42);
+
+    std::cout << "Span: " << tiny << std::endl;
+    try {
+        std::cout << "Shortest span: " << tiny.shortestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    try {
+        std::cout << "Longest span: " << tiny.longestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
     
     return 0;
 }

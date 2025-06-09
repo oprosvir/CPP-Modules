@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 21:51:14 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/08 23:55:54 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/09 20:47:48 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,22 @@ void Span::addNumber(int number) {
 	if (_data.size() >= _maxSize)
 		throw std::runtime_error("Span is full");
 	_data.push_back(number);
+}
+
+int Span::shortestSpan() const {
+	if (_data.size() < 2)
+		throw std::runtime_error("Not enough elements to find a span");
+
+	std::vector<int> sorted = _data; // copy
+	std::sort(sorted.begin(), sorted.end());
+
+	int minSpan = std::numeric_limits<int>::max();
+	for (size_t i = 1; i < sorted.size(); ++i) {
+		int diff = sorted[i] - sorted[i - 1];
+		if (diff < minSpan)
+			minSpan = diff;
+	}
+	return minSpan;
 }
 
 int Span::longestSpan() const {
