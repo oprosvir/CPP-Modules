@@ -6,12 +6,13 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:31:00 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/10 20:29:21 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:46:59 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 #include "../ex00/easyfind.hpp"
+#include "../ex01/Span.hpp"
 #include <algorithm>
 #include <iostream>
 #include <list>
@@ -133,6 +134,13 @@ int main(void) {
     printContainer(efstack);
 
     std::cout << "Found: " << *easyfind(efstack, 3) << std::endl;
+
+    std::cout << "\n--- addRange from MutantStack to Span ---" << std::endl;
+    Span sp(10);
+    sp.addRange(efstack.begin(), efstack.end());
+    std::cout << "Span from MutantStack: " << sp << std::endl;
+    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+    std::cout << "Longest span:  " << sp.longestSpan() << std::endl;
     
 	return 0;
 }
