@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:31:00 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/10 20:46:59 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/10 21:20:04 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,26 @@ int main(void) {
     assigned = mstack;
 
     std::cout << "Copy size: " << copy.size() << ", Assigned top: " << assigned.top() << std::endl;
+    
+    std::cout << "\n--- MutantStack<std::string> ---" << std::endl;
+
+    MutantStack<std::string> strStack;
+    strStack.push("Hello");
+    strStack.push("Mutant");
+    strStack.push("Stack");
+    strStack.push("!");
+
+    printContainer(strStack);
+
+    std::cout << "Top string: " << strStack.top() << std::endl;
+
+    std::cout << "After pop: ";
+    strStack.pop();
+    printContainer(strStack);
+
+    std::cout << "Reversing: ";
+    std::reverse(strStack.begin(), strStack.end());
+    printContainer(strStack);
     
     std::cout << "\n--- STL algorithms on MutantStack ---" << std::endl;
     MutantStack<int> algostack;
