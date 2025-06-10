@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 10:31:00 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/06/10 21:20:04 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/06/10 21:42:46 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ int main(void) {
     ++it;
     --it;
 	while (it != ite) {
-		std::cout << *it << std::endl;
+		std::cout << *it << " ";
 		++it;
 	}
+    std::cout << std::endl;
 	std::stack<int> s(mstack);
+    //printContainer(s); // no iterator in stack
 
     std::cout << "\n--- std::list comparison ---" << std::endl;
 
@@ -72,10 +74,12 @@ int main(void) {
     ++lit;
     --lit;
 	while (lit != lite) {
-		std::cout << *lit << std::endl;
+		std::cout << *lit << " ";
 		++lit;
 	}
-	std::stack<int, std::list<int> > clst(lst);
+    std::cout << std::endl;
+	std::list<int> clst(lst);
+    //printContainer(clst);
 
     std::cout << "\n--- Const MutantStack iteration ---" << std::endl;
     const MutantStack<int> constStack = mstack;
