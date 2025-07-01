@@ -30,3 +30,6 @@ This repository contains a collection of C++ exercises, organized into modules. 
   
 - [cpp08](./cpp08)  
   *Templated containers, iterators, algorithms.*
+
+- [cpp09](./cpp09)  
+  *STL containers.*
