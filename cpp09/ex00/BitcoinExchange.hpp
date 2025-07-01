@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:56 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/01 20:21:41 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/01 21:09:17 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 
@@ -26,6 +27,8 @@ public:
 	BitcoinExchange(const BitcoinExchange& other);
 	BitcoinExchange& operator=(const BitcoinExchange& other); 
 	~BitcoinExchange();
+
+	BitcoinExchange(const std::string& dbFilename); // load CSV database
 };
 
 #endif
