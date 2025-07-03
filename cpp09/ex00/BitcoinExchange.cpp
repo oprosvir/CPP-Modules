@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:49 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/03 01:59:03 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/03 03:07:33 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,26 @@ std::string BitcoinExchange::trim(const std::string& str) const {
     if (first == std::string::npos || last == std::string::npos)
         return "";
     return str.substr(first, last - first + 1);
+}
+
+void BitcoinExchange::processLine(const std::string& line) const {
+    std::istringstream iss(line);
+    std::string date, valueStr;
+
+    std::getline(iss, date, '|');
+    std::getline(iss, valueStr);
+    
+    // if (!std::getline(iss, date, '|') || !std::getline(iss, valueStr)) {
+    //     std::cerr << "Error: bad input => " << line << std::endl;
+    //     return;
+    // }
+    
+    date = trim(date); 
+    valueStr = trim(valueStr);
+    if (date.empty() || valueStr.empty()) {
+        std::cerr << "Error: bad input => " << line << std::endl;
+        return;
+    }
+    
+    // float value;   
 }

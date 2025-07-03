@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:14 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/03 01:24:17 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/03 02:29:01 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,19 @@ int main(int argc, char* argv[]) {
         BitcoinExchange exchange("data.csv");
         std::string line;
         std::getline(inputFile, line);
+
+        while (std::getline(inputFile, line)) {
+            line = exchange.trim(line);
+            if (line.empty()) {
+                std::cerr << "Error: empty line." << std::endl;
+                continue;
+            }
+            if (line.find('|') == std::string::npos) {
+                std::cerr << "Error: bad input => " << line << std::endl;
+                continue;
+            }
+            exchange.processLine(line);
+        }
     }
     catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
