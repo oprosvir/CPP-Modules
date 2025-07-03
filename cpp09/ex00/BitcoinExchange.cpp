@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:49 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/03 03:07:33 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/03 22:26:53 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,31 @@ std::string BitcoinExchange::trim(const std::string& str) const {
     return str.substr(first, last - first + 1);
 }
 
+bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) const {
+    std::istringstream iss(valueStr);
+    if (!(iss >> value) || !iss.eof()) {
+        std::cerr << "Error: invalid value => " << valueStr << std::endl;
+        return false;
+    }
+    
+    if (value < 0) {
+        std::cerr << "Error: not a positive number." << std::endl;
+        return false;
+    }
+    
+    if (value > 1000) {
+        std::cerr << "Error: too large a number." << std::endl;
+        return false;
+    }
+    return true;
+}
+
 void BitcoinExchange::processLine(const std::string& line) const {
     std::istringstream iss(line);
     std::string date, valueStr;
 
     std::getline(iss, date, '|');
     std::getline(iss, valueStr);
-    
-    // if (!std::getline(iss, date, '|') || !std::getline(iss, valueStr)) {
-    //     std::cerr << "Error: bad input => " << line << std::endl;
-    //     return;
-    // }
     
     date = trim(date); 
     valueStr = trim(valueStr);
@@ -81,5 +95,9 @@ void BitcoinExchange::processLine(const std::string& line) const {
         return;
     }
     
-    // float value;   
+    float value;
+    if (!isValidValue(valueStr, value))
+        return;
+    
+     
 }
