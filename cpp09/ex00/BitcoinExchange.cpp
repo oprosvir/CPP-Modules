@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:49 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/03 22:26:53 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/04 00:10:27 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ std::string BitcoinExchange::trim(const std::string& str) const {
     return str.substr(first, last - first + 1);
 }
 
+// float or a positive integer, between 0 and 1000
 bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) const {
     std::istringstream iss(valueStr);
     if (!(iss >> value) || !iss.eof()) {
@@ -81,6 +82,35 @@ bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) co
     return true;
 }
 
+static bool isLeapYear(int year) {
+    return (year % 4 == 0) && (year % 100 != 0 || year % 400 == 0);
+}
+
+// YYYY-MM-DD format
+bool BitcoinExchange::isValidDate(const std::string& date) const {
+    if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+        return false;
+
+    int y = std::atoi(date.substr(0, 4).c_str()); //year
+    int m = std::atoi(date.substr(5, 2).c_str()); //month
+    int d = std::atoi(date.substr(8, 2).c_str()); //day
+
+    if (y < 2009 || m < 1 || m > 12 || d < 1 || d > 31)
+        return false;
+    
+    if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30)
+        return false;
+
+    if (m == 2) {
+        if (d > 29)
+            return false;
+        if (d == 29 && !isLeapYear(y))
+            return false;
+    }
+    // std::cout << "[DEBUG] Valid date: " << date << std::endl;    
+    return true;
+}
+
 void BitcoinExchange::processLine(const std::string& line) const {
     std::istringstream iss(line);
     std::string date, valueStr;
@@ -94,10 +124,27 @@ void BitcoinExchange::processLine(const std::string& line) const {
         std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }
+
+    if (!isValidDate(date)) {
+        std::cerr << "Error: bad input => " << line << std::endl;
+        return;
+    }
     
     float value;
     if (!isValidValue(valueStr, value))
         return;
     
-     
+    std::map<std::string, float>::const_iterator it = _rates.lower_bound(date);
+    if (it == _rates.end() || it->first != date) {
+        if (it == _rates.begin()) {
+            std::cerr << "Error: no rate available before " << date << std::endl;
+            return;
+        }
+        --it;
+    }
+    
+    float result = value * it->second;
+    std::cout << date << " => " << valueStr << " = " 
+              << std::fixed << std::setprecision(2)
+              << result << std::endl;
 }
