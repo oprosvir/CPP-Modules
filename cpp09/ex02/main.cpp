@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:33 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/05 14:43:32 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/06 23:01:18 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ int main(int argc, char** argv)
         std::cerr << "Error: no input provided." << std::endl;
         return 1;
     }
-
-    // Process the input arguments and perform the merge operation
-    // This is a placeholder for the actual implementation
-    std::cout << "Processing input..." << std::endl;
-
-    // Example of how to use the PmergeMe class (to be implemented)
-    // PmergeMe pm;
-    // pm.processInput(argc, argv);
+    
+    try {
+        PmergeMe sorter;
+        sorter.load(argc, argv);
+        sorter.process();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }
