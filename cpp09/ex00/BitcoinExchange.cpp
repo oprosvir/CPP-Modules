@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:49 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/04 00:10:27 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/15 00:45:02 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ BitcoinExchange::BitcoinExchange(const std::string& dbFilename) {
     }
 }
 
-std::string BitcoinExchange::trim(const std::string& str) const {
+std::string trim(const std::string& str) {
     size_t first = str.find_first_not_of(" \t\r\n");
     size_t last = str.find_last_not_of(" \t\r\n");
     if (first == std::string::npos || last == std::string::npos)
@@ -91,11 +91,18 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
         return false;
 
+    for (size_t i = 0; i < date.size(); ++i) {
+        if (i == 4 || i == 7)
+            continue;
+        if (!std::isdigit(date[i]))
+            return false;
+    }
+
     int y = std::atoi(date.substr(0, 4).c_str()); //year
     int m = std::atoi(date.substr(5, 2).c_str()); //month
     int d = std::atoi(date.substr(8, 2).c_str()); //day
 
-    if (y < 2009 || m < 1 || m > 12 || d < 1 || d > 31)
+    if (m < 1 || m > 12 || d < 1 || d > 31)
         return false;
     
     if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30)
@@ -129,19 +136,19 @@ void BitcoinExchange::processLine(const std::string& line) const {
         std::cerr << "Error: bad input => " << line << std::endl;
         return;
     }
+
+    if (date < _rates.begin()->first) {
+        std::cerr << "Error: no rate available before " << _rates.begin()->first << std::endl;
+        return;
+    }
     
     float value;
     if (!isValidValue(valueStr, value))
         return;
     
     std::map<std::string, float>::const_iterator it = _rates.lower_bound(date);
-    if (it == _rates.end() || it->first != date) {
-        if (it == _rates.begin()) {
-            std::cerr << "Error: no rate available before " << date << std::endl;
-            return;
-        }
+    if (it == _rates.end() || it->first != date)
         --it;
-    }
     
     float result = value * it->second;
     std::cout << date << " => " << valueStr << " = " 

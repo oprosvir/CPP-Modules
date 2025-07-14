@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 16:10:56 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/03 21:40:11 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/14 23:37:38 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ private:
 	
 	bool isValidValue(const std::string& valueStr, float& value) const;
 	bool isValidDate(const std::string& date) const;
+	
 public:
 	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& other);
@@ -31,8 +32,9 @@ public:
 	~BitcoinExchange();
 
 	BitcoinExchange(const std::string& dbFilename); // load CSV database
-	std::string trim(const std::string& str) const;
 	void processLine(const std::string& line) const;
 };
+
+std::string trim(const std::string& str);
 
 #endif
