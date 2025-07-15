@@ -6,11 +6,12 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 00:44:56 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/04 18:00:56 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/15 16:08:58 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
+#include <sstream>
 
 // canonical form
 RPN::RPN() {}
@@ -24,7 +25,7 @@ static bool isOperator(char c) {
 
 static void applyOperator(std::stack<int>& stack, char op) {
     if (stack.size() < 2)
-        throw std::runtime_error("Error");
+        throw std::runtime_error("Error: not enough operands for operator '" + std::string(1, op) + "'");
 
     int b = stack.top(); stack.pop();
     int a = stack.top(); stack.pop();
@@ -35,7 +36,7 @@ static void applyOperator(std::stack<int>& stack, char op) {
         case '*': stack.push(a * b); break;
         case '/':
             if (b == 0)
-                throw std::runtime_error("Error");
+                throw std::runtime_error("Error: Division by zero");
             stack.push(a / b);
             break;
         default:
@@ -45,25 +46,25 @@ static void applyOperator(std::stack<int>& stack, char op) {
 
 int RPN::evaluate(const std::string& expression) {
     std::stack<int> stack;
+    std::istringstream iss(expression);
+    std::string token;
 
-    for (std::string::const_iterator it = expression.begin(); it != expression.end(); ++it) {
-        char c = *it;
-        if (c == ' ')
-            continue;
-
-        if (isdigit(c)) {
-            stack.push(c - '0');
+    while (iss >> token) {
+        // std::cout << "[" << token << "] ";
+        if (token.length() == 1 && isdigit(token[0])) {
+            stack.push(token[0] - '0');
         }
-        else if (isOperator(c)) {
-            applyOperator(stack, c);
+        else if (token.length() == 2 && token[0] == '-' && isdigit(token[1]) && token[1] != '0') {
+            stack.push(-(token[1] - '0'));
         }
-        else {
-            throw std::runtime_error("Error");
-        }
+        else if (token.length() == 1 && isOperator(token[0]))
+            applyOperator(stack, token[0]);
+        else
+            throw std::runtime_error("Error: invalid token '" + token + "'");
     }
 
     if (stack.size() != 1)
-        throw std::runtime_error("Error");
+        throw std::runtime_error("Error: Invalid expression");
 
     return stack.top();
 }

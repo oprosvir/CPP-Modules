@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 00:41:18 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/04 17:39:21 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:24:23 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int main(int argc, char* argv[])
 {
     if (argc != 2) {
-        std::cerr << "Error: Wrong number of arguments." << std::endl;
+        std::cerr << "Error: Wrong number of argument" << std::endl;
         return 1;
     }
     
     std::string input = argv[1];
     if (input.empty()) {
-        std::cerr << "Error: Empty input." << std::endl;
+        std::cerr << "Error: Empty input" << std::endl;
         return 1;
     }
 
