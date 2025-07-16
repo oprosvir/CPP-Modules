@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:54 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 02:07:11 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 02:35:20 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,43 @@ void PmergeMe::load(int argc, char** argv) {
     }
 }
 
-static void insertWithBinarySearchVector(std::vector<int>& vec, int value) {
-    std::vector<int>::iterator pos = std::lower_bound(vec.begin(), vec.end(), value);
-    vec.insert(pos, value);
-}
+// Jacobsthal sequence for insertion order
+static std::vector<size_t> generateJacobsthalSeq(size_t size) {
+    std::vector<size_t> result;
+    std::set<size_t> used;
+    size_t j0 = 0, j1 = 1;
+    size_t jn;
 
-static void insertWithBinarySearchDeque(std::deque<int>& deq, int value) {
-    std::deque<int>::iterator pos = std::lower_bound(deq.begin(), deq.end(), value);
-    deq.insert(pos, value);
+    while ((jn = j1 + 2 * j0) < size) {
+        if (used.insert(j1).second)
+            result.push_back(j1);
+        j0 = j1;
+        j1 = jn;
+    }
+
+    for (size_t i = 0; i < size; ++i) {
+        if (used.insert(i).second)
+            result.push_back(i);
+    }
+
+    return result;
 }
 
 void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
-    if (vec.size() <= 1) return;
+    if (vec.size() <= 1)
+        return;
 
     std::vector<int> mainChain;
     std::vector<int> pend;
 
-    // split into pairs
+    // 1. Split into pairs
     for (size_t i = 0; i + 1 < vec.size(); i += 2) {
         int first = vec[i];
         int second = vec[i + 1];
-        if (first > second) std::swap(first, second);
+        
+        if (first > second)
+            std::swap(first, second);
+            
         mainChain.push_back(second);
         pend.push_back(first);
     }
@@ -85,18 +101,25 @@ void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
         pend.push_back(vec.back());
     }
 
-    // Sort mainChain recursively
+    // 2. Sort mainChain recursively
     mergeInsertSort(mainChain);
 
-    // Insert pending elements one by one using binary search
-    for (size_t i = 0; i < pend.size(); ++i)
-        insertWithBinarySearchVector(mainChain, pend[i]);
+    std::vector<size_t> insertionOrder = generateJacobsthalSeq(pend.size());
+
+    // 3. Insert elements from pend into mainChain
+    // using binary search for insertion
+    for (size_t i = 0; i < insertionOrder.size(); ++i) {
+        if (insertionOrder[i] >= pend.size())
+            continue;
+        binaryInsert(mainChain, pend[insertionOrder[i]]);
+    }
 
     vec = mainChain;
 }
 
 void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
-    if (deq.size() <= 1) return;
+    if (deq.size() <= 1)
+        return;
 
     std::deque<int> mainChain;
     std::deque<int> pend;
@@ -104,7 +127,10 @@ void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
     for (size_t i = 0; i + 1 < deq.size(); i += 2) {
         int first = deq[i];
         int second = deq[i + 1];
-        if (first > second) std::swap(first, second);
+        
+        if (first > second)
+            std::swap(first, second);
+            
         mainChain.push_back(second);
         pend.push_back(first);
     }
@@ -114,8 +140,13 @@ void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
 
     mergeInsertSort(mainChain);
 
-    for (size_t i = 0; i < pend.size(); ++i)
-        insertWithBinarySearchDeque(mainChain, pend[i]);
+    std::vector<size_t> insertionOrder = generateJacobsthalSeq(pend.size());
+
+    for (size_t i = 0; i < insertionOrder.size(); ++i) {
+        if (insertionOrder[i] >= pend.size())
+            continue;
+        binaryInsert(mainChain, pend[insertionOrder[i]]);
+    }
 
     deq = mainChain;
 }

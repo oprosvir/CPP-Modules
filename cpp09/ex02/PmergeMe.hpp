@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:13:05 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 02:04:57 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 02:21:17 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <set>
 
 class PmergeMe {
 public:
@@ -30,9 +31,27 @@ public:
 private:
     std::vector<int> _vec;
     std::deque<int> _deque;
+
+    template <typename Container>
+    void binaryInsert(Container &container, int value);
     
     void mergeInsertSort(std::vector<int>& data);
     void mergeInsertSort(std::deque<int>& data);
 };
+
+template <typename Container>
+void PmergeMe::binaryInsert(Container &container, int value) {
+    typename Container::iterator begin = container.begin();
+    typename Container::iterator end = container.end();
+
+    while (begin < end) {
+        typename Container::iterator mid = begin + (end - begin) / 2;
+        if (*mid < value)
+            begin = mid + 1;
+        else
+            end = mid;
+    }
+    container.insert(begin, value);
+}
 
 #endif
