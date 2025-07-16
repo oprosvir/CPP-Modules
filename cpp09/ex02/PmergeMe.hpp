@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:13:05 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 02:21:17 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 23:14:58 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ public:
     PmergeMe& operator=(const PmergeMe& other);
     ~PmergeMe();
 
-    void load(int argc, char** argv);
-    void process();
+    void checkArgs(int argc, char** argv);
+    void process(int argc, char** argv);
 
 private:
-    std::vector<int> _vec;
-    std::deque<int> _deque;
+    std::vector<int> _input;
+
+    void mergeInsertSort(std::vector<int>& data);
+    void mergeInsertSort(std::deque<int>& data);
+
+    std::vector<size_t> generateJacobsthalSeq(size_t size);
 
     template <typename Container>
     void binaryInsert(Container &container, int value);
     
-    void mergeInsertSort(std::vector<int>& data);
-    void mergeInsertSort(std::deque<int>& data);
 };
 
 template <typename Container>

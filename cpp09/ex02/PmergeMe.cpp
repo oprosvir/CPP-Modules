@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:54 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 02:35:20 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 23:38:14 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,11 @@
 PmergeMe::PmergeMe() {}
 
 PmergeMe::PmergeMe(const PmergeMe& other)
-    : _vec(other._vec), _deque(other._deque) {}
+    : _input(other._input) {}
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
-    if (this != &other) {
-        _vec = other._vec;
-        _deque = other._deque;
-    }
+    if (this != &other)
+        _input = other._input;
     return *this;
 }
 
@@ -41,7 +39,7 @@ static bool isValidNumber(const std::string& str) {
     return val > 0 && val <= INT_MAX;
 }
 
-void PmergeMe::load(int argc, char** argv) {
+void PmergeMe::checkArgs(int argc, char** argv) {
     if (argc < 2)
         throw std::runtime_error("Usage: ./PmergeMe <sequence of positive integers>");
     for (int i = 1; i < argc; ++i) {
@@ -50,13 +48,12 @@ void PmergeMe::load(int argc, char** argv) {
             throw std::runtime_error("Error: invalid input");
         }
         int num = std::atoi(arg.c_str());
-        _vec.push_back(num);
-        _deque.push_back(num);
+        _input.push_back(num);
     }
 }
 
 // Jacobsthal sequence for insertion order
-static std::vector<size_t> generateJacobsthalSeq(size_t size) {
+std::vector<size_t> PmergeMe::generateJacobsthalSeq(size_t size) {
     std::vector<size_t> result;
     std::set<size_t> used;
     size_t j0 = 0, j1 = 1;
@@ -151,33 +148,41 @@ void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
     deq = mainChain;
 }
 
-void PmergeMe::process() {
+void PmergeMe::process(int argc, char** argv) {
     std::cout << "Before:";
-    for (size_t i = 0; i < _vec.size(); ++i)
-        std::cout << " " << _vec[i];
+    for (size_t i = 0; i < _input.size(); ++i)
+        std::cout << " " << _input[i];
     std::cout << std::endl;
 
+    // === VECTOR ===
     clock_t startVec = clock();
-    mergeInsertSort(_vec);
+    std::vector<int> vec;
+    for (int i = 1; i < argc; ++i)
+        vec.push_back(std::atoi(argv[i]));
+    mergeInsertSort(vec);
     clock_t endVec = clock();
 
+    // === DEQUE ===
     clock_t startDeq = clock();
-    mergeInsertSort(_deque);
+    std::deque<int> deq;
+    for (int i = 1; i < argc; ++i)
+        deq.push_back(std::atoi(argv[i]));
+    mergeInsertSort(deq);
     clock_t endDeq = clock();
 
     std::cout << "After: ";
-    for (size_t i = 0; i < _vec.size(); ++i)
-        std::cout << " " << _vec[i];
+    for (size_t i = 0; i < vec.size(); ++i)
+        std::cout << " " << vec[i];
     std::cout << std::endl;
-
+    
     double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1e6;
     double timeDeq = static_cast<double>(endDeq - startDeq) / CLOCKS_PER_SEC * 1e6;
-    
-    std::cout << "Time to process a range of " << _vec.size()
+
+    std::cout << "Time to process a range of " << vec.size()
               << " elements with std::vector : " << std::fixed << std::setprecision(5)
               << timeVec << " us" << std::endl;
     
-    std::cout << "Time to process a range of " << _deque.size()
+    std::cout << "Time to process a range of " << deq.size()
               << " elements with std::deque : " << std::fixed << std::setprecision(5)
               << timeDeq << " us" << std::endl;
 }
