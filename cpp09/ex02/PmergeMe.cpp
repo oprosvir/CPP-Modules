@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:54 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/07 02:44:17 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 02:07:11 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static bool isValidNumber(const std::string& str) {
 }
 
 void PmergeMe::load(int argc, char** argv) {
+    if (argc < 2)
+        throw std::runtime_error("Usage: ./PmergeMe <sequence of positive integers>");
     for (int i = 1; i < argc; ++i) {
         std::string arg(argv[i]);
         if (!isValidNumber(arg)) {
@@ -63,7 +65,7 @@ static void insertWithBinarySearchDeque(std::deque<int>& deq, int value) {
     deq.insert(pos, value);
 }
 
-void PmergeMe::mergeInsertSortVector(std::vector<int>& vec) {
+void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
     if (vec.size() <= 1) return;
 
     std::vector<int> mainChain;
@@ -84,7 +86,7 @@ void PmergeMe::mergeInsertSortVector(std::vector<int>& vec) {
     }
 
     // Sort mainChain recursively
-    mergeInsertSortVector(mainChain);
+    mergeInsertSort(mainChain);
 
     // Insert pending elements one by one using binary search
     for (size_t i = 0; i < pend.size(); ++i)
@@ -93,7 +95,7 @@ void PmergeMe::mergeInsertSortVector(std::vector<int>& vec) {
     vec = mainChain;
 }
 
-void PmergeMe::mergeInsertSortDeque(std::deque<int>& deq) {
+void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
     if (deq.size() <= 1) return;
 
     std::deque<int> mainChain;
@@ -110,7 +112,7 @@ void PmergeMe::mergeInsertSortDeque(std::deque<int>& deq) {
     if (deq.size() % 2 != 0)
         pend.push_back(deq.back());
 
-    mergeInsertSortDeque(mainChain);
+    mergeInsertSort(mainChain);
 
     for (size_t i = 0; i < pend.size(); ++i)
         insertWithBinarySearchDeque(mainChain, pend[i]);
@@ -125,11 +127,11 @@ void PmergeMe::process() {
     std::cout << std::endl;
 
     clock_t startVec = clock();
-    mergeInsertSortVector(_vec);
+    mergeInsertSort(_vec);
     clock_t endVec = clock();
 
     clock_t startDeq = clock();
-    mergeInsertSortDeque(_deque);
+    mergeInsertSort(_deque);
     clock_t endDeq = clock();
 
     std::cout << "After: ";

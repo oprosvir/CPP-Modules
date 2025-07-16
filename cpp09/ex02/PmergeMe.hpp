@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:13:05 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/07 02:37:16 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/16 02:04:57 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ private:
     std::vector<int> _vec;
     std::deque<int> _deque;
     
-    void mergeInsertSortVector(std::vector<int>& vec);
-    void mergeInsertSortDeque(std::deque<int>& deq);
+    void mergeInsertSort(std::vector<int>& data);
+    void mergeInsertSort(std::deque<int>& data);
 };
 
 #endif
