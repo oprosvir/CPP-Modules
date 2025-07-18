@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:13:05 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/18 02:13:12 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:27:20 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,35 @@ private:
     void mergeInsertSort(std::vector<int>& data);
     void mergeInsertSort(std::deque<int>& data);
 
-    std::vector<size_t> generateInsertionOrder(size_t size);
+    template <typename Container>
+    Container generateInsertionOrder(size_t size);
 
     template <typename Container>
     void binaryInsert(Container &container, int value);
     
 };
+
+template <typename Container>
+Container PmergeMe::generateInsertionOrder(size_t size) {
+    Container result;
+    std::set<size_t> used;
+    size_t j0 = 0, j1 = 1;
+    size_t jn;
+
+    while ((jn = j1 + 2 * j0) < size) {
+        if (used.insert(j1).second)
+            result.push_back(j1);
+        j0 = j1;
+        j1 = jn;
+    }
+
+    for (size_t i = 0; i < size; ++i) {
+        if (used.insert(i).second)
+            result.push_back(i);
+    }
+
+    return result;
+}
 
 template <typename Container>
 void PmergeMe::binaryInsert(Container &container, int value) {

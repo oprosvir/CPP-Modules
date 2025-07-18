@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:54 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/18 02:13:56 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:25:00 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,6 @@ void PmergeMe::checkArgs(int argc, char** argv) {
     }
 }
 
-std::vector<size_t> PmergeMe::generateInsertionOrder(size_t size) {
-    std::vector<size_t> result;
-    std::set<size_t> used;
-    size_t j0 = 0, j1 = 1;
-    size_t jn;
-
-    while ((jn = j1 + 2 * j0) < size) {
-        if (used.insert(j1).second)
-            result.push_back(j1);
-        j0 = j1;
-        j1 = jn;
-    }
-
-    for (size_t i = 0; i < size; ++i) {
-        if (used.insert(i).second)
-            result.push_back(i);
-    }
-
-    return result;
-}
-
 void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
     if (vec.size() <= 1)
         return;
@@ -100,7 +79,7 @@ void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
     // 2. Sort mainChain recursively
     mergeInsertSort(mainChain);
 
-    std::vector<size_t> insertionOrder = generateInsertionOrder(pend.size());
+    std::vector<size_t> insertionOrder = generateInsertionOrder<std::vector<size_t> >(pend.size());
 
     // 3. Insert elements from pend into mainChain
     // using binary search for insertion
@@ -136,7 +115,7 @@ void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
 
     mergeInsertSort(mainChain);
 
-    std::vector<size_t> insertionOrder = generateInsertionOrder(pend.size());
+    std::deque<size_t> insertionOrder = generateInsertionOrder<std::deque<size_t> >(pend.size());
 
     for (size_t i = 0; i < insertionOrder.size(); ++i) {
         if (insertionOrder[i] >= pend.size())
