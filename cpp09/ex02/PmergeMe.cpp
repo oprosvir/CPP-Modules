@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:12:54 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 23:38:14 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:13:56 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void PmergeMe::checkArgs(int argc, char** argv) {
     }
 }
 
-// Jacobsthal sequence for insertion order
-std::vector<size_t> PmergeMe::generateJacobsthalSeq(size_t size) {
+std::vector<size_t> PmergeMe::generateInsertionOrder(size_t size) {
     std::vector<size_t> result;
     std::set<size_t> used;
     size_t j0 = 0, j1 = 1;
@@ -101,7 +100,7 @@ void PmergeMe::mergeInsertSort(std::vector<int>& vec) {
     // 2. Sort mainChain recursively
     mergeInsertSort(mainChain);
 
-    std::vector<size_t> insertionOrder = generateJacobsthalSeq(pend.size());
+    std::vector<size_t> insertionOrder = generateInsertionOrder(pend.size());
 
     // 3. Insert elements from pend into mainChain
     // using binary search for insertion
@@ -137,7 +136,7 @@ void PmergeMe::mergeInsertSort(std::deque<int>& deq) {
 
     mergeInsertSort(mainChain);
 
-    std::vector<size_t> insertionOrder = generateJacobsthalSeq(pend.size());
+    std::vector<size_t> insertionOrder = generateInsertionOrder(pend.size());
 
     for (size_t i = 0; i < insertionOrder.size(); ++i) {
         if (insertionOrder[i] >= pend.size())
@@ -175,8 +174,8 @@ void PmergeMe::process(int argc, char** argv) {
         std::cout << " " << vec[i];
     std::cout << std::endl;
     
-    double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC * 1e6;
-    double timeDeq = static_cast<double>(endDeq - startDeq) / CLOCKS_PER_SEC * 1e6;
+    double timeVec = static_cast<double>(endVec - startVec);
+    double timeDeq = static_cast<double>(endDeq - startDeq);
 
     std::cout << "Time to process a range of " << vec.size()
               << " elements with std::vector : " << std::fixed << std::setprecision(5)

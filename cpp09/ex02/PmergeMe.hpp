@@ -6,7 +6,7 @@
 /*   By: oprosvir <oprosvir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:13:05 by oprosvir          #+#    #+#             */
-/*   Updated: 2025/07/16 23:14:58 by oprosvir         ###   ########.fr       */
+/*   Updated: 2025/07/18 02:13:12 by oprosvir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ private:
     void mergeInsertSort(std::vector<int>& data);
     void mergeInsertSort(std::deque<int>& data);
 
-    std::vector<size_t> generateJacobsthalSeq(size_t size);
+    std::vector<size_t> generateInsertionOrder(size_t size);
 
     template <typename Container>
     void binaryInsert(Container &container, int value);
